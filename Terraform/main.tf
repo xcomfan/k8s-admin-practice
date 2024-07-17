@@ -26,13 +26,21 @@ data "aws_subnets" "default" {
 }
 
 resource "aws_security_group" "instance" {
-  name = "K8s-practice-allow-ssh"
+  name = "K8s practice allow ssh and all in security group"
 
   ingress {
     from_port = var.ssh_port
     to_port = var.ssh_port
     protocol = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  # Allow all traffic withing the security group
+  ingress {
+    from_port = 0
+    to_port = 0
+    protocol = -1
+    self = true
   }
 
   egress {

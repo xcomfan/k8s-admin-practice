@@ -56,6 +56,7 @@ resource "aws_instance" "master_node" {
   instance_type = "t4g.small"
   vpc_security_group_ids = [aws_security_group.instance.id]
   key_name = var.key_name
+  user_data = "${file("user_data.sh")}"
   tags = {
     Name = "Master Node"
   }
@@ -66,6 +67,7 @@ resource "aws_instance" "worker_node" {
   instance_type = "t4g.small"
   vpc_security_group_ids = [aws_security_group.instance.id]
   key_name = var.key_name
+  user_data = "${file("user_data.sh")}"
   tags = {
     Name = "Worker Node"
   }
